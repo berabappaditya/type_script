@@ -11,13 +11,74 @@
 //     // }
 //   }
 // });
-console.log("i am at zohoooooooooooooooooooooooo");
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-    console.log(request, sender, sendResponse);
-//       chrome.scripting.executeScript({
-//     target: {tabId: tab.id},
-//     files: ['injectScript.js']
+
+
+// document.addEventListener('DOMContentLoaded',  ()=> {
+
+//     console.log("i am at zohoooooooooooooooooooooooo");
+//     const breakBttn: any = document.querySelector("#breakListPopup > div > div.rgt-brkcont > button");
+//     console.log(breakBttn)
+//     document.querySelector("#breakListPopup > div > div.rgt-brkcont > button").addEventListener("click", function () {
+//         console.log("sending breakkkkkkkk");
+//         chrome.runtime.sendMessage({ action: "breakTimeStart" });
+
+//     });
+// })
+
+// var actualCode = 'console.log("laeklfhjkadhfjklhafjlhkljh");'
+//     + 'var button = document.querySelector("#breakListPopup > div > div.rgt-brkcont > button");'
+//     + 'console.log("mmmmmmbmbmbmbmbmbmbmb",button);'
+//     + 'if(button) {'
+//     + '  button.addEventListener("click", function() {'
+//     + '    console.log("Button clicked!");'
+//     + '    chrome.runtime.sendMessage({message: "breakTimeStart"});'
+//     + '  });'
+//     + '}'
+
+// var script = document.createElement('script');
+// script.textContent = actualCode;
+// (document.head || document.documentElement).appendChild(script);
+// script.parentNode.removeChild(script);
+
+
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     var button = document.querySelector("#breakListPopup > div > div.rgt-brkcont > button");
+//     if(button) {
+//       button.addEventListener("click", function() {
+//         console.log("Button clicked!");
+//         chrome.runtime.sendMessage({message: "Button clicked!"});
+//       });
+//     }
 //   });
-    sendResponse('我收到你的消息了：'+JSON.stringify("request"));
+  
+  
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    console.log(request, sender, sendResponse);
+    //       chrome.scripting.executeScript({
+    //     target: {tabId: tab.id},
+    //     files: ['injectScript.js']
+    //   });
+
+    let resume = document.querySelector("#breakRunningDiv")
+    if (resume) {
+        console.log("resome div", resume);
+        (resume as HTMLElement).click();
+    }
+
+    var button = document.querySelector("#breakListPopup > div > div.rgt-brkcont > button");
+    if(button) {
+        console.log("fre btn",button);
+      button.addEventListener("click", function() {
+        console.log("Button clicked!");
+        chrome.runtime.sendMessage({message: "Button clicked!"});
+      });
+    }
+    sendResponse({ request: JSON.stringify(request), status: "done" });
+
+
+
+
 });
