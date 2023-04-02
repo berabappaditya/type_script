@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./popup.css";
+import "./popup.scss";
 import App from "./App";
 
 const popup: React.FC<{}> = () => {

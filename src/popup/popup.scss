@@ -1,0 +1,152 @@
+// Example SCSS code
+$primary-color: #e8e8e8;
+body {
+  background-color: #ffffff;
+  width: 400px;
+  height: 468px;
+}
+
+h1 {
+  color: $primary-color;
+}
+.start_button {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  --font: "LatoWeb";
+  --fontbold: "latobold";
+  --zp-white: #ffffff;
+  --zp-black: #000000;
+  --zp-gray: #666666;
+  --zp-base: #458bd6;
+  --zp-green: #00bd9e;
+  --zp-org: #faba59;
+  --zp-red: #e95b6d;
+  --bdyBgClr: #fafafa;
+  --lgtgry: #999;
+  --fontSz12: 12px;
+  --fontSz13: 13px;
+  --fontSz14: 14px;
+  --fontSz15: 15px;
+  --fontSz16: 16px;
+  --fontSz18: 18px;
+  --fontSz20: 20px;
+  --fontSz22: 22px;
+  --fontSz24: 24px;
+  --num10: 10px;
+  --MB30: 30px;
+  --MB20: 20px;
+  --wms-default-bg-color-rgb: 255, 255, 255;
+  --wms-default-bg-color: rgb(var(--wms-default-bg-color-rgb));
+  --wms-btn-secondary-bg-hover-rgb: 247, 248, 248;
+  --wms-btn-secondary-bg-hover: rgb(var(--wms-btn-secondary-bg-hover-rgb));
+  --wms-color-divider-rgb: 230, 230, 230;
+  --wms-color-divider: rgb(var(--wms-color-divider-rgb));
+  --wms-color-online-rgb: 20, 180, 116;
+  --wms-color-online: rgb(var(--wms-color-online-rgb));
+  --wms-color-red-rgb: 239, 83, 100;
+  --wms-color-red: rgb(var(--wms-color-red-rgb));
+  --wms-color-theme-rgb: 70, 160, 235;
+  --wms-color-theme: rgb(var(--wms-color-theme-rgb));
+  --wms-color-main-rgb: 34, 34, 34;
+  --wms-color-main: rgb(var(--wms-color-main-rgb));
+  --wms-color-secondary-rgb: 102, 102, 102;
+  --wms-color-secondary: rgb(var(--wms-color-secondary-rgb));
+  --wms-color-lp1-rgb: 136, 136, 136;
+  --wms-color-lp1: rgb(var(--wms-color-lp1-rgb));
+  --wms-primary-colorcode: 32, 138, 237;
+  --wms-primary-color: rgb(var(--wms-primary-colorcode));
+  --wms-hover-shadow: inset 0 4px 50px rgba(0, 0, 0, 0.15);
+  --videoplayer-theme-color: #4bbeff;
+  --wms-chat-bg-colorcode: 255, 255, 255;
+  --wms-chat-bg-color: rgb(var(--wms-chat-bg-colorcode));
+  --wms-bubble-colorcode: 228, 228, 228;
+  --wms-bubble-color: rgb(var(--wms-bubble-colorcode));
+  --wms-otheruser-bubble-colorcode: 246, 246, 246;
+  --wms-otheruser-bubble-color: rgb(var(--wms-otheruser-bubble-colorcode));
+  --wms-border-colorcode: 213, 213, 213;
+  --wms-border-color: rgb(var(--wms-border-colorcode));
+  --wms-primary-text-colorcode: 0, 0, 0;
+  --wms-primary-text-color: rgb(var(--wms-primary-text-colorcode));
+  --wms-secondary-text-colorcode: 102, 102, 102;
+  --wms-secondary-text-color: rgb(var(--wms-secondary-text-colorcode));
+  --wms-chatwin-strip-colorcode: 240, 240, 240;
+  --wms-chatwin-strip-color: rgb(var(--wms-chatwin-strip-colorcode));
+  --wms-chatwin-glow-colorcode: 250, 228, 163;
+  --wms-chatwin-glow-color: rgb(var(--wms-chatwin-glow-colorcode));
+  --wms-chatwin-glow-shadowcode: 66, 54, 19;
+  --wms-chatwin-glow-shadow: rgba(var(--wms-chatwin-glow-shadowcode), 0.2);
+  --zsservice-single-color: #2770b2;
+  --zsicon-LHSService: #ffffff;
+  --zssmaller--primaryLHSBGColor: #3a3d46;
+  --zs-bgcolor-gsSearchTopBandHolder: #f5f5f5;
+  --zs-primaryServicesBGLoaderColor: #3a3d45;
+  --zs-primaryServicesIconLoaderColor: #53555c;
+  --zs-bgcolor-gsSearchBottomHolder: #ffffff;
+  --zs-bgcolor-gsSettingAppColor: #ffffff;
+  --zs-primaryLHSTextColor: #333333;
+  --zs-tour-primary-txtColor: #000000;
+  --zs-tour-primaryBGColor: #ffffff;
+  --zs-tour-primaryTagline_txtColor: #606060;
+  --zs-tour-primaryFooterBGColor: #dfdfdf;
+  --zs-tourlegBGColor: #000000;
+  --zs-primaryColor: #000000;
+  --zs-primaryBGColor: #3a3d46;
+  --zs-primaryHoverBGColor: #2f2f2f;
+  --zs-primaryBGLightColor: #3a3d46;
+  --zs-primarySelectedBGColor: #2fa6ea;
+  --zs-primaryThemeIconColor: #2fa6ea;
+  --zs-tour-primaryHeaderColor: #2fa6ea;
+  --zs-primarySelectedTextColor: #2fa6ea;
+  --zs-primarySelectedBGLightHoverColor: #eefaff;
+  --zs-primarySelectedBGLightColor: #e1eef5;
+  --zs-gsMailUnReadIcon: -26px -3px;
+  --zs-gsMailUnReadReplyIcon: -50px -5px;
+  --zs-gsMailUnReadForwardIcon: -75px -5px;
+  --zs-gsChatGroupIcon: -70px -486px;
+  --zs-gsHPVideotime: -14px -1235px;
+  --zs-gsMinimise: -80px -1231px;
+  --zs-gsMaximise: -113px -1229px;
+  --zs-gsModuleSeleFilterTick: -145px -758px;
+  --zs-gsNaviArr: -179px -818px;
+  --zs-gsConnectorToolsCoutIcon: -217px -1051px;
+  text-transform: none;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  font: inherit;
+  background: #00bd9e;
+  width: 100%;
+  padding: 4px 10px;
+  height: 45px;
+  color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 0px #ccc;
+}
+
+.btn_wraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 6px;
+  div {
+    flex-grow: 1;
+  }
+  .stop_button {
+    text-transform: none;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    background: #ff3f5c;
+    width: 100%;
+    padding: 4px 10px;
+    height: 45px;
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px 0px #ccc;
+  }
+}
