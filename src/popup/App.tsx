@@ -22,8 +22,8 @@ const App = (props: Props) => {
       console.log("helooooooooo");
     }
   });
-  const handleClick = () => {
-    chrome.runtime.sendMessage({ message: "clickButton" }, function (response) {
+  const handleBrkStart = () => {
+    chrome.runtime.sendMessage({ message: "clickBrkBtn" }, function (response) {
       console.log(response);
       if (response.status === "done") {
         setOnBreak(!onBreak);
@@ -32,7 +32,7 @@ const App = (props: Props) => {
   };
   
   const handleStop=()=>{
-    chrome.runtime.sendMessage({ message: "stopBreak" }, function (response) {
+    chrome.runtime.sendMessage({ message: "stopBrKBtn" }, function (response) {
       if(response.status==="done"){
         setOnBreak(!onBreak);
       }
@@ -41,7 +41,7 @@ const App = (props: Props) => {
   return (
     <div>
       <div className="btn_wraper">
-        <button onClick={handleClick} className="start_button">
+        <button onClick={handleBrkStart} className="start_button">
           {time.toLocaleTimeString()}
           <br />
           start Break
