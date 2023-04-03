@@ -82,3 +82,26 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log("BreakResume bjs");
   }
 });
+
+
+// Set up an interval to show the notification every 5 minutes
+const intervalId = setInterval(() => {
+  // Check if the current tab is active
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const activeTab = tabs[0];
+    if (activeTab) {
+      // Show a notification in the active tab
+      chrome.notifications.create('', {
+        type: 'basic',
+        iconUrl: 'icon.png',
+        title: 'Reminder',
+        message: 'Hello! This is a reminder.',
+      });
+    }
+  });
+}, 1 * 60 * 1000);
+
+// Clear the interval when the extension is unloaded
+chrome.runtime.onSuspend.addListener(() => {
+  clearInterval(intervalId);
+});
