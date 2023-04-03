@@ -44,17 +44,42 @@
 
 
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     var button = document.querySelector("#breakListPopup > div > div.rgt-brkcont > button");
-//     if(button) {
-//       button.addEventListener("click", function() {
-//         console.log("Button clicked!");
-//         chrome.runtime.sendMessage({message: "Button clicked!"});
-//       });
+//document.addEventListener('DOMContentLoaded', function() {
+// const btnInterval = setInterval(() => {
+//     button = document.querySelector("#breakListPopup > div > div.rgt-brkcont > button");
+//     console.log("*********************");
+
+//     console.log("button ::: ", button)
+//     if (button) {
+//         clearInterval(btnInterval)
+//         button.addEventListener("click", function () {
+//             console.log("Button clicked!");
+//             chrome.runtime.sendMessage({ message: "Button clicked!" });
+//         });
 //     }
-//   });
+// }, 500)
+
+//});
+document.body.addEventListener('click', function(event: Event) {
+    const target = event.target;
+    if (target instanceof Element) {
+      const startBrkBtn = target.closest('#breakListPopup > div > div.rgt-brkcont > button');
+      if (startBrkBtn) {
+        console.log('Break start clicked!');
+        chrome.runtime.sendMessage({ message: 'BreakStart' });
+      }else{
+        const resumeBtn=target.closest("#ResWrk")
+        if(resumeBtn){
+            console.log('Break resume clicked!');
+        chrome.runtime.sendMessage({ message: 'BreakResume' });
+        }
+      }
+    }
+  });
   
   
+
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log(request, sender, sendResponse);
     //       chrome.scripting.executeScript({
@@ -69,12 +94,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
 
     var button = document.querySelector("#breakListPopup > div > div.rgt-brkcont > button");
-    if(button) {
-        console.log("fre btn",button);
-      button.addEventListener("click", function() {
-        console.log("Button clicked!");
-        chrome.runtime.sendMessage({message: "Button clicked!"});
-      });
+    if (button) {
+        console.log("fre btn", button);
+        button.addEventListener("click", function () {
+            console.log("Button clicked!");
+            chrome.runtime.sendMessage({ message: "Button clicked!" });
+        });
     }
     sendResponse({ request: JSON.stringify(request), status: "done" });
 

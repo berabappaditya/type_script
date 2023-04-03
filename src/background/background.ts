@@ -20,67 +20,65 @@ chrome.action.onClicked.addListener((tab) => {
   // });
 });
 const setPopup = async () => {
-  // const fr_token = await helper.getDatafromStorage("fr_token")
-  // // console.log("fr_token ::: ", fr_token)
-  // if(!helper.isEmptyObj(fr_token)){
   chrome.action.setPopup({ popup: "popup.html" });
-  // }
-  // else{
-  //   chrome.tabs.create({ url: process.env.REACT_APP_APP_URL });
-  // }
 };
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+// chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+//   // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+//   let tb = getCurrentTab();
+//   tb.then((res) => {
+//     if (message.action === "clickButton") {
+//       console.log("triggered bacjjs", res[0].id);
 
-  
+//       chrome.scripting.executeScript({
+//         target: { tabId: res[0].id },
+//         files: ["injectScript.js"],
+//       });
+//       chrome.tabs.sendMessage(
+//         res[0].id,
+//         { action: message.action },
+//         function (response) {
+//           sendResponse(response);
+//         }
+//       );
+//       chrome.action.setBadgeBackgroundColor({ color: '#FF2D00' });
+//       chrome.action.setBadgeText({ text:'out!!' });
 
-
-
-  // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  let tb = getCurrentTab();
-  tb.then((res) => {
-    if (message.action === "clickButton") {
-      console.log("triggered bacjjs", res[0].id);
-
-      chrome.scripting.executeScript({
-        target: { tabId: res[0].id },
-        files: ["injectScript.js"],
-      });
-      chrome.tabs.sendMessage(
-        res[0].id,
-        { action: message.action },
-        function (response) {
-          sendResponse(response);
-        }
-      );
-      chrome.action.setBadgeBackgroundColor({ color: '#FF2D00' });
-      chrome.action.setBadgeText({ text:'out!!' });
-
-      // });
-      return true; // Keep the message channel open for sendResponse
-    } else if (message.action === "stopBreak") {
-      console.log("stoppp breakkkkk:", message);
-      chrome.tabs.sendMessage(
-        res[0].id,
-        { action: message.action,tbId:res[0].id},
-        function (response) {
-          sendResponse(response);
-        }
-      );
-      chrome.action.setBadgeBackgroundColor({ color: '#00FF8B' });
-      chrome.action.setBadgeText({ text:'In!!' });
-    }
-  }).catch((err) => {
-    console.log("bck script error", err);
-  });
+//       // });
+//       return true; // Keep the message channel open for sendResponse
+//     } else if (message.action === "stopBreak") {
+//       console.log("stoppp breakkkkk:", message);
+//       chrome.tabs.sendMessage(
+//         res[0].id,
+//         { action: message.action,tbId:res[0].id},
+//         function (response) {
+//           sendResponse(response);
+//         }
+//       );
+//       chrome.action.setBadgeBackgroundColor({ color: '#00FF8B' });
+//       chrome.action.setBadgeText({ text:'In!!' });
+//     }
+//   }).catch((err) => {
+//     console.log("bck script error", err);
+//   });
 
 
-});
+// });
 
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.message === "Button clicked!") {
-    chrome.extension.getViews({type: "popup"}).forEach(function(popup) {
-      popup.postMessage({message: "Button clicked!"}, "*");
-    });
+  if (request.message === "BreakStart") {
+    // chrome.extension.getViews({type: "popup"}).forEach(function(popup) {
+    //   popup.postMessage({message: "BreakStart"}, "*");
+    // });
+    chrome.action.setBadgeBackgroundColor({ color: '#FF2D00' });
+      chrome.action.setBadgeText({ text:'out!!' });
+      console.log("BreakStart bjs");
+  }else if(request.message === "BreakResume"){
+    // chrome.extension.getViews({type: "popup"}).forEach(function(popup) {
+    //   popup.postMessage({message: "BreakResume"}, "*");
+    // });
+    chrome.action.setBadgeBackgroundColor({ color: '#00FF8B' });
+    chrome.action.setBadgeText({ text:'In!!' });
+    console.log("BreakResume bjs");
   }
 });

@@ -6,13 +6,13 @@ const App = (props: Props) => {
   const [onBreak,setOnBreak]=useState(false);
 
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.message === "Button clicked!") {
+    if (request.message === "BreakStart") {
       // Do something when the button is clicked on the page
       console.log("helooooooooo")
     }
   });
   const handleClick = () => {
-    chrome.runtime.sendMessage({ action: "clickButton" }, function (response) {
+    chrome.runtime.sendMessage({ message: "clickButton" }, function (response) {
       console.log(response);
        if(response.status==="done"){
         setOnBreak(!onBreak);
@@ -21,7 +21,7 @@ const App = (props: Props) => {
   };
   
   const handleStop=()=>{
-    chrome.runtime.sendMessage({ action: "stopBreak" }, function (response) {
+    chrome.runtime.sendMessage({ message: "stopBreak" }, function (response) {
       if(response.status==="done"){
         setOnBreak(!onBreak);
        }
