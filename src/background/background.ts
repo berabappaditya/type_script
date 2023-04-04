@@ -20,6 +20,7 @@ const urlExists = async (url: string) => {
 }
 
 let zohoPeopleAtnd: any = false;
+let breakNotifyIntervalId;
 const updateLInkObj = () => {
   urlExists("https://people.zoho.in/hrmstier5/zp#attendance/entry/listview").then((res) => {
     zohoPeopleAtnd = res;
@@ -30,6 +31,18 @@ const updateLInkObj = () => {
 
 }
 updateLInkObj();
+
+function startOnBreakNotification() {
+  breakNotifyIntervalId = setInterval(() => {
+    chrome.notifications.create('', {
+      type: 'progress',
+      iconUrl: 'icon.png',
+      title: 'Reminder',
+      message: 'Hello! You are on break',
+    });
+  }
+    , 1000)
+}
 
 async function getCurrentTab() {
   let queryOptions = { active: true, currentWindow: true };
@@ -55,11 +68,11 @@ chrome.action.onClicked.addListener((tab) => {
   } else {
     chrome.tabs.create({
       url: "https://people.zoho.in/hrmstier5/zp#attendance/entry/listview"
-    },(tab)=>{
-      zohoPeopleAtnd=tab;
+    }, (tab) => {
+      zohoPeopleAtnd = tab;
     });
 
-    
+
   }
   setPopup();
 
@@ -71,9 +84,11 @@ chrome.action.onClicked.addListener((tab) => {
 const setPopup = async () => {
   chrome.action.setPopup({ popup: "popup.html" });
 };
+
+
+
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-
-
   switch (request.message) {
     case "clickBrkBtn":
       chrome.tabs.sendMessage(zohoPeopleAtnd.id,
@@ -82,6 +97,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           sendResponse(response);
         }
       );
+      
       chrome.action.setBadgeBackgroundColor({ color: '#FF2D00' });
       chrome.action.setBadgeText({ text: 'out!!' });
       break;
@@ -92,6 +108,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           sendResponse(response);
         }
       );
+      clearInterval(breakNotifyIntervalId)
       chrome.action.setBadgeBackgroundColor({ color: '#00FF8B' });
       chrome.action.setBadgeText({ text: 'In!!' });
       break;
@@ -99,43 +116,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 
 
-  // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  // let tb = getCurrentTab();
-  // tb.then((res) => {
-  //   if (message.action === "clickButton") {
-  //     console.log("triggered bacjjs", res[0].id);
 
-  //     chrome.scripting.executeScript({
-  //       target: { tabId: res[0].id },
-  //       files: ["injectScript.js"],
-  //     });
-  //     chrome.tabs.sendMessage(
-  //       res[0].id,
-  //       { action: message.action },
-  //       function (response) {
-  //         sendResponse(response);
-  //       }
-  //     );
-  //     chrome.action.setBadgeBackgroundColor({ color: '#FF2D00' });
-  //     chrome.action.setBadgeText({ text:'out!!' });
-
-  //     // });
-  //     return true; // Keep the message channel open for sendResponse
-  //   } else if (message.action === "stopBreak") {
-  //     console.log("stoppp breakkkkk:", message);
-  //     chrome.tabs.sendMessage(
-  //       res[0].id,
-  //       { action: message.action,tbId:res[0].id},
-  //       function (response) {
-  //         sendResponse(response);
-  //       }
-  //     );
-  //     chrome.action.setBadgeBackgroundColor({ color: '#00FF8B' });
-  //     chrome.action.setBadgeText({ text:'In!!' });
-  //   }
-  // }).catch((err) => {
-  //   console.log("bck script error", err);
-  // });
 
   let allTabs = getAllTabs();
   allTabs.then((res) => {
@@ -150,10 +131,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === "BreakStart") {
+
+    startOnBreakNotification();
     chrome.action.setBadgeBackgroundColor({ color: '#FF2D00' });
     chrome.action.setBadgeText({ text: 'out!!' });
     console.log("BreakStart bjs");
   } else if (request.message === "BreakResume") {
+    clearInterval(breakNotifyIntervalId)
     chrome.action.setBadgeBackgroundColor({ color: '#00FF8B' });
     chrome.action.setBadgeText({ text: 'In!!' });
     console.log("BreakResume bjs");
