@@ -1,4 +1,5 @@
 // TODO: content script
+console.log("hi chattyyyyyyyyy");
 
 document.body.addEventListener('click', function (event: Event) {
     const target = event.target;

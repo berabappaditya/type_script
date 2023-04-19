@@ -35,7 +35,7 @@ updateLInkObj();
 function startOnBreakNotification() {
   breakNotifyIntervalId = setInterval(() => {
     chrome.notifications.create('', {
-      type: 'progress',
+      type: 'basic',
       iconUrl: 'icon.png',
       title: 'Reminder',
       message: 'Hello! You are on break',

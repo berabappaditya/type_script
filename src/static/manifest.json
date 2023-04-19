@@ -28,7 +28,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://people.zoho.in/*"],
+      "matches": ["https://people.zoho.in/*","https://tier5.teamwork.com/chat/*"],
       "js": ["contentScript.js"]
     }
   ],
